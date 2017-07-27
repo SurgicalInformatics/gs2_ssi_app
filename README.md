@@ -1,1 +1,1 @@
-The repo doesn't include the original (patient-level) data so downloading the code won't run on it's own. A fully working example of this app using the diamonds example dataset can be downloaded from here: https://github.com/riinuots/shinyviz
+The repo doesn't include the original (patient-level) data so downloading the code won't run. A fully working example of this app using the diamonds dataset can be downloaded from here: https://github.com/riinuots/shinyviz
