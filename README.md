@@ -1,4 +1,1 @@
-# gs2_ssi_app
-Shiny code behind our Surgical Site Infections app
-
-The repo doesn't include the original (patient-level) data
+The repo doesn't include the original (patient-level) data so downloading the code won't run on it's own. A fully working example of this app using the diamonds example dataset can be downloaded from here: https://github.com/riinuots/shinyviz
