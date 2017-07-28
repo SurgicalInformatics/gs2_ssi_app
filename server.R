@@ -61,6 +61,13 @@ shinyServer(function(input, output) {
       subdata$outcome %<>%  fct_rev()
     }
     
+    if (input$rem_unkwn){
+      subdata %<>%   filter(outcome != 'Unknown')
+    }
+    if (input$rem_mis){
+      subdata %<>%   filter(outcome != 'Missing')
+    }
+    
     # shift outcome levels
     subdata$outcome %<>%  fct_shift(input$fct_shift)
     
@@ -212,7 +219,7 @@ shinyServer(function(input, output) {
     # expl2 = 'ALL'
     # outcome = 'ssi_yn.collapsed'
     # subdata = alldata[, c(expl1, expl2, outcome)]
-    colnames(subdata) = c('expl1', 'expl2', 'outcome')
+    #colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
     
     subdata %>% 

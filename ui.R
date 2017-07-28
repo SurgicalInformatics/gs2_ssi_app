@@ -60,7 +60,16 @@ shinyUI(fluidPage(
              # this complements the Reverse order options.
              sliderInput("fct_shift", "Shift outcome levels:",
                          min = 0, max = 6, value = 0, step=1,
-                         ticks=TRUE)
+                         ticks=TRUE),
+             fluidRow(
+               column(3,
+                      h5('Remove:')),
+               column(3,
+                      checkboxInput("rem_unkwn",   "Unknown",   FALSE) ),
+               column(3,
+                      checkboxInput("rem_mis",   "Missing",   FALSE) ),
+               column(3, h5("(Outcome only)"))
+             )
            )
     ), #end_A1
     wellPanel( # begin_A2
