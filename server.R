@@ -1,3 +1,4 @@
+# https://argonaut.is.ed.ac.uk/shiny/rots/gs2_ssi/
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -11,6 +12,15 @@ library(shiny)
 load('shinydata.rda')
 alldata = shinydata
 alldata$ALL = 'ALL'
+
+
+load('allvars_grouped.rda')
+#reordering the deafult levels of Outcome variables
+alldata = alldata %>% 
+  mutate_at(as.character(allvars_grouped$Outcomes), fct_rev) # need the as.character as otherwise was using the names()
+alldata$mort30.factor %<>% fct_shift(2)
+alldata$reintervention_yn.factor %<>% fct_shift(2)
+
 
 #there's a logical for this in the ui
 barplot_type = 'stack' #'fill' or 'stack'
@@ -40,6 +50,7 @@ shinyServer(function(input, output) {
     colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
     #reverse factor levels
+
     if (input$rev_expl1){
       subdata$expl1 %<>%   fct_rev()
     }
@@ -142,7 +153,7 @@ shinyServer(function(input, output) {
       )+
       ylab('Patients')+
       scale_fill_brewer(palette=input$my_palette, name = names(outcome), direction=colour_order)+
-      guides(fill=guide_legend(ncol=my_ncol)) +
+      guides(fill=guide_legend(ncol=my_ncol, reverse = TRUE)) +
       xlab(names(expl1))
     
     summary_table$outcome = fct_drop(summary_table$outcome)

@@ -1,4 +1,4 @@
-# https://argonaut.is.ed.ac.uk/shiny/private/gs2_ssi/
+# https://argonaut.is.ed.ac.uk/shiny/rots/gs2_ssi/
 library(shiny)
 library(shinythemes)
 
@@ -52,7 +52,7 @@ shinyUI(fluidPage(
                column(2,
                       checkboxInput("rev_expl2",   "Split",   FALSE) ),
                column(4,
-                      checkboxInput("rev_outcome", "Outcome", TRUE) )
+                      checkboxInput("rev_outcome", "Outcome", FALSE) )
              ),
            fluidRow( # A1.4 - shift outcome levels
              # the percentage label is only plotted for the first factor level (otherwise would start overlapping)
