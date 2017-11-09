@@ -63,12 +63,11 @@ shinyUI(fluidPage(
                          ticks=TRUE),
              fluidRow(
                column(3,
-                      h5('Remove:')),
+                      h5('Remove from outcome:')),
                column(3,
                       checkboxInput("rem_unkwn",   "Unknown",   FALSE) ),
                column(3,
-                      checkboxInput("rem_mis",   "Missing",   FALSE) ),
-               column(3, h5("(Outcome only)"))
+                      checkboxInput("rem_mis",   "Missing",   FALSE) )
              )
            )
     ), #end_A1
@@ -124,10 +123,11 @@ shinyUI(fluidPage(
   column(8, 
          tabsetPanel(type = "tabs", 
                      tabPanel("Data", uiOutput("plot.ui"),
-                              p('Numbers:'),
+                              p('Table'),
                               tableOutput('table')), 
                      #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
-                     tabPanel('Info', h4( a("http://globalsurg.org/", href="http://globalsurg.org/") ))
+                     tabPanel('Info', h4( a("http://globalsurg.org/", href="http://globalsurg.org/")),
+                              h4( a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app")))
          )
   )
   
