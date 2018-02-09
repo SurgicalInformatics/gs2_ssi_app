@@ -4,6 +4,10 @@ library(shinythemes)
 
 load('allvars_grouped.rda')
 
+# removing the option ALL for the outcome variable - this has no levels
+allvars_grouped_outcome = allvars_grouped
+allvars_grouped_outcome$General = allvars_grouped_outcome$General[-1]
+
 
 palettes = list(
   'Qualitative' = rev(c('Accent', 'Dark2', 'Dark1','Paired', 'Pastel1', 'Pastel2', 'Set1', 'Set2', 'Set3')),
@@ -36,7 +40,7 @@ shinyUI(fluidPage(
              selectInput("outcome",
                          label    = "Outcome variable:",
                          selected = c("ssi_yn.collapsed"),
-                         choices  = allvars_grouped,
+                         choices  = allvars_grouped_outcome,
                          multiple = FALSE),
              checkboxInput("axis_relative",
                            label = "Relative to total (x-axis to %)",
@@ -126,6 +130,7 @@ shinyUI(fluidPage(
                               p('Table'),
                               tableOutput('table')), 
                      #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
+                     tabPanel("Study summary", includeMarkdown("lay_summary.md")),
                      tabPanel('Info', h4( a("http://globalsurg.org/", href="http://globalsurg.org/")),
                               h4( a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app")))
          )
