@@ -71,7 +71,7 @@ shinyUI(fluidPage(
                column(3,
                       checkboxInput("rem_unkwn",   "Unknown",   FALSE) ),
                column(3,
-                      checkboxInput("rem_mis",   "Missing",   FALSE) )
+                      checkboxInput("rem_mis",   "Missing",   TRUE) )
              )
            )
     ), #end_A1
@@ -118,7 +118,12 @@ shinyUI(fluidPage(
                           inline=TRUE)
            )
            
-    ) # end_A3.2
+    ), # end_A3.2
+    fluidRow(
+      column(12,
+      p("App information and open-source code: "),
+      a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app")
+      ))
     
   ), #end_A
   
@@ -126,13 +131,20 @@ shinyUI(fluidPage(
   
   column(8, 
          tabsetPanel(type = "tabs", 
-                     tabPanel("Data", uiOutput("plot.ui"),
-                              p('Table'),
+                     tabPanel("Data",
+                              conditionalPanel("$('html').hasClass('shiny-busy')", h3("Loading...", style="color:#FF0099")),
+                              uiOutput("plot.ui"),
+                              #p('Table'),
                               tableOutput('table')), 
                      #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
-                     tabPanel("Study summary", includeMarkdown("lay_summary.md")),
-                     tabPanel('Info', h4( a("http://globalsurg.org/", href="http://globalsurg.org/")),
-                              h4( a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app")))
+                     tabPanel("Study summary",
+                              br(),
+                              downloadLink("laysummary", "Lay Summary - Download PDF"),
+                              includeMarkdown("lay_summary.md")),
+                     tabPanel("Abstract", 
+                              br(),
+                              p("Full publication will be available on 13-February 2018"),
+                              includeMarkdown("abstract.md"))
          )
   )
   

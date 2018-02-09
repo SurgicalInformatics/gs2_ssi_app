@@ -114,7 +114,14 @@ shinyServer(function(input, output) {
   # create plot
   myplot_p = reactive({
     
+    withProgress(message = 'Progress: ', value = 0, {
+    incProgress(0.3, detail = "Pulling data")
+    #Sys.sleep(0.5) # for testing progress bar
+    
     summary_table = create_summary()
+    
+    incProgress(0.6, detail = "Plotting data")
+    #Sys.sleep(0.5) # for testing progress bar
     
     expl1 = input$explanatory1
     expl2 = input$explanatory2
@@ -184,6 +191,7 @@ shinyServer(function(input, output) {
     
     
     p
+    }) # end withProgress
     
   })
   
@@ -241,9 +249,14 @@ shinyServer(function(input, output) {
     summary_table
     
   })
+
   
-  
-  
+  output$laysummary <- downloadHandler(
+    filename = "globalsurg_ssi_lay_summary.pdf",
+    content = function(file) {
+      file.copy("pdf/globalsurg_ssi_lay_summary.pdf", file)
+    }
+  )
   
   
   
