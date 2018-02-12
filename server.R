@@ -11,7 +11,7 @@ library(shiny)
 
 load('shinydata.rda')
 alldata = shinydata
-alldata$ALL = 'ALL'
+alldata$ALL = factor('ALL')
 
 
 load('allvars_grouped.rda')
@@ -26,7 +26,7 @@ alldata$reintervention_yn.factor %<>% fct_shift(2)
 barplot_type = 'stack' #'fill' or 'stack'
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   # subset data --------------------------
   data_subset         <- reactive({     
@@ -49,7 +49,7 @@ shinyServer(function(input, output) {
     subdata = alldata[, c(expl1, expl2, outcome)]
     colnames(subdata) = c('expl1', 'expl2', 'outcome')
     
-    #reverse factor levels
+    #reverse or shift factor levels -----------
 
     if (input$rev_expl1){
       subdata$expl1 %<>%   fct_rev()
@@ -61,6 +61,11 @@ shinyServer(function(input, output) {
       subdata$outcome %<>%  fct_rev()
     }
     
+    subdata$outcome %<>%  fct_shift(input$fct_shift)
+    
+    
+    # remove missing or unknown ------------
+    
     if (input$rem_unkwn){
       subdata %<>%   filter(outcome != 'Unknown')
     }
@@ -68,12 +73,26 @@ shinyServer(function(input, output) {
       subdata %<>%   filter(outcome != 'Missing')
     }
     
-    # shift outcome levels
-    subdata$outcome %<>%  fct_shift(input$fct_shift)
+    # updating plot default heigth on the UI -----
+    # (reacts shoulnd't have side-effects but I'll make this one an exception)
+    
+    number_explanatory   = subdata$expl1 %>% levels() %>% length()
+    number_panels        = subdata$expl2 %>% levels() %>% length()
+    number_outcomes      = subdata$outcome %>% levels() %>% length()
+    
+
+    adjust_heigth = 30 + number_explanatory*50 + number_panels*100 + number_outcomes*10
+
+    print(paste("Number of levels in explanatory", number_explanatory))
+    updateSliderInput(session, "height", value = adjust_heigth)
     
     subdata
     
   })
+
+
+
+
   
   create_summary = reactive({
     

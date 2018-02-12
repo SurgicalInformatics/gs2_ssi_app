@@ -24,8 +24,8 @@ shinyUI(fluidPage(
   fluidRow(
     
     column(4, # A - input panel
-           wellPanel( # begin_A1
-             h3('Main input parameters:'),
+           wellPanel(style = "background-color: #ffffff;", # begin_A1
+             h4('Main input parameters:'),
              # A1.1 - explanatory, split, outcome
              selectInput("explanatory1",
                          label    = "Explanatory variable:",
@@ -47,7 +47,7 @@ shinyUI(fluidPage(
                            value = FALSE)
            ),
            wellPanel(
-             h3('Advanced parameters:'),
+             h4('Advanced parameters:'),
              fluidRow(
                column(3,
                       h5('Reverse order:')),
@@ -76,8 +76,8 @@ shinyUI(fluidPage(
              )
            ), #end_A1
            wellPanel( # begin_A2
-             sliderInput("width", "Plot Width (%)", min = 20, max = 100, value = 80, step=10),
-             sliderInput("height", "Plot Height (px)", min = 100, max = 1000, value = 400, step=50)
+             sliderInput("width",  "Plot Width (%)", min = 20, max = 100, value = 80, step=10),
+             sliderInput("height", "Plot Height (px)", min = 200, max = 1000, value = 400, step=50)
            ), # end_A2
            # begin_A3
            column(6, #begin_A3.1
