@@ -118,11 +118,12 @@ shinyServer(function(input, output, session) {
     
     summary_table$relative = 100*summary_table$n/summary_table$total
     
-    summary_table$relative %>% 
-      signif(2) %>% #round to 2 significant figrues
-      formatC(digits=2, format='fg') %>% #format to 2 significant figures
-      paste0('%') ->
-      summary_table$relative_label
+    summary_table %<>% 
+      mutate(relative_label = if_else(relative<99,
+                                      signif(relative, 2) %>% formatC(digits=2, format='fg'),
+                                      signif(relative, 4) %>% formatC(digits=4, format='fg')) %>%
+               paste0('%')
+      )
     
     
     
