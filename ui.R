@@ -58,96 +58,97 @@ shinyUI(fluidPage(
                column(4,
                       checkboxInput("rev_outcome", "Outcome", FALSE) )
              ),
-           fluidRow( # A1.4 - shift outcome levels
-             # the percentage label is only plotted for the first factor level (otherwise would start overlapping)
-             # this "shifter" is useful if you want another level to be the first one on the barplot
-             # this complements the Reverse order options.
-             sliderInput("fct_shift", "Shift outcome levels:",
-                         min = 0, max = 6, value = 0, step=1,
-                         ticks=TRUE),
-             fluidRow(
-               column(3,
-                      h5('Remove from outcome:')),
-               column(3,
-                      checkboxInput("rem_unkwn",   "Unknown",   FALSE) ),
-               column(3,
-                      checkboxInput("rem_mis",   "Missing",   TRUE) )
+             fluidRow( # A1.4 - shift outcome levels
+               # the percentage label is only plotted for the first factor level (otherwise would start overlapping)
+               # this "shifter" is useful if you want another level to be the first one on the barplot
+               # this complements the Reverse order options.
+               sliderInput("fct_shift", "Shift outcome levels:",
+                           min = 0, max = 6, value = 0, step=1,
+                           ticks=TRUE),
+               fluidRow(
+                 column(3,
+                        h5('Remove from outcome:')),
+                 column(3,
+                        checkboxInput("rem_unkwn",   "Unknown",   FALSE) ),
+                 column(3,
+                        checkboxInput("rem_mis",   "Missing",   TRUE) )
+               )
              )
-           )
-    ), #end_A1
-    wellPanel( # begin_A2
-      sliderInput("width", "Plot Width (%)", min = 20, max = 100, value = 80, step=10),
-      sliderInput("height", "Plot Height (px)", min = 100, max = 1000, value = 400, step=50)
-    ), # end_A2
-    # begin_A3
-    column(6, #begin_A3.1
-           wellPanel(
-             checkboxGroupInput("subset1",
-                                label     = ("Subsetting: included countries"),
-                                #note the spaces after the names (e.g. 'Ideal ')
-                                #that's because in this syntax, Shiny expects names and values to be different
-                                #which would be useful if you data for, e.g. 1,2,3,4,5 instead of names
-                                #without the spaces you get:
-                                #ERROR: 'selected' must be the values instead of names of 'choices' for the input 'subset1'
-                                choices   = list('High HDI '       = 'High',
-                                                 'Middle HDI '     = 'Middle',
-                                                 'Low HDI '        = 'Low')
-                                ,selected = c('High', 'Middle', 'Low'))
+           ), #end_A1
+           wellPanel( # begin_A2
+             sliderInput("width", "Plot Width (%)", min = 20, max = 100, value = 80, step=10),
+             sliderInput("height", "Plot Height (px)", min = 100, max = 1000, value = 400, step=50)
+           ), # end_A2
+           # begin_A3
+           column(6, #begin_A3.1
+                  wellPanel(
+                    checkboxGroupInput("subset1",
+                                       label     = ("Subsetting: included countries"),
+                                       #note the spaces after the names (e.g. 'Ideal ')
+                                       #that's because in this syntax, Shiny expects names and values to be different
+                                       #which would be useful if you data for, e.g. 1,2,3,4,5 instead of names
+                                       #without the spaces you get:
+                                       #ERROR: 'selected' must be the values instead of names of 'choices' for the input 'subset1'
+                                       choices   = list('High HDI '       = 'High',
+                                                        'Middle HDI '     = 'Middle',
+                                                        'Low HDI '        = 'Low')
+                                       ,selected = c('High', 'Middle', 'Low'))
+                    
+                  )
+           ), #end_A3.1
+           column(6, # begin_A3.2
+                  wellPanel(
+                    selectInput("my_palette",
+                                label = "Colour palette:",
+                                selected = c("Paired"),
+                                choices  = palettes,
+                                multiple = FALSE),
+                    checkboxInput("reverse_colours", "Reverse colours", FALSE),
+                    radioButtons('legend_columns', 'Legend columns',
+                                 choices  = c(1:3),
+                                 selected = 2,
+                                 inline   = TRUE),
+                    checkboxInput("perc_label", "% label:", TRUE),
+                    radioButtons('black_white', label=NULL,
+                                 choices = list(
+                                   'Black' = 'black',
+                                   'White' = 'white'
+                                 ),
+                                 selected = 'white',
+                                 inline=TRUE)
+                  )
+                  
+           )  # end_A3.2
 
-           )
-    ), #end_A3.1
-    column(6, # begin_A3.2
-           wellPanel(
-             selectInput("my_palette",
-                         label = "Colour palette:",
-                         selected = c("Paired"),
-                         choices  = palettes,
-                         multiple = FALSE),
-             checkboxInput("reverse_colours", "Reverse colours", FALSE),
-             radioButtons('legend_columns', 'Legend columns',
-                          choices  = c(1:3),
-                          selected = 2,
-                          inline   = TRUE),
-             checkboxInput("perc_label", "% label:", TRUE),
-             radioButtons('black_white', label=NULL,
-                          choices = list(
-                            'Black' = 'black',
-                            'White' = 'white'
-                          ),
-                          selected = 'white',
-                          inline=TRUE)
-           )
            
-    ), # end_A3.2
-    fluidRow(
-      column(12,
-      p("App information and open-source code: "),
-      a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app")
-      ))
+    ), #end_A
     
-  ), #end_A
+    
+    
+    column(8, 
+           tabsetPanel(type = "tabs", 
+                       tabPanel("Data",
+                                conditionalPanel("$('html').hasClass('shiny-busy')", h3("Loading...", style="color:#FF0099")),
+                                uiOutput("plot.ui"),
+                                #p('Table'),
+                                tableOutput('table')), 
+                       #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
+                       tabPanel("Study summary",
+                                br(),
+                                downloadLink("laysummary", "Lay Summary - Download PDF"),
+                                includeMarkdown("lay_summary.md")),
+                       tabPanel("Abstract", 
+                                br(),
+                                p("Full publication will be available on 13-February 2018"),
+                                includeMarkdown("abstract.md"))
+           )
+    )
+    
+  ), 
+  fluidRow(
+    column(12,
+    p("App information and open-source code: ",
+    a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app"))
+    ))
   
-  
-  
-  column(8, 
-         tabsetPanel(type = "tabs", 
-                     tabPanel("Data",
-                              conditionalPanel("$('html').hasClass('shiny-busy')", h3("Loading...", style="color:#FF0099")),
-                              uiOutput("plot.ui"),
-                              #p('Table'),
-                              tableOutput('table')), 
-                     #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
-                     tabPanel("Study summary",
-                              br(),
-                              downloadLink("laysummary", "Lay Summary - Download PDF"),
-                              includeMarkdown("lay_summary.md")),
-                     tabPanel("Abstract", 
-                              br(),
-                              p("Full publication will be available on 13-February 2018"),
-                              includeMarkdown("abstract.md"))
-         )
-  )
-  
-)
-
 ))
