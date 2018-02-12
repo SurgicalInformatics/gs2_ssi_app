@@ -76,9 +76,9 @@ shinyServer(function(input, output, session) {
     # updating plot default heigth on the UI -----
     # (reacts shoulnd't have side-effects but I'll make this one an exception)
     
-    number_explanatory   = subdata$expl1 %>% levels() %>% length()
-    number_panels        = subdata$expl2 %>% levels() %>% length()
-    number_outcomes      = subdata$outcome %>% levels() %>% length()
+    number_explanatory   = subdata$expl1   %>% unique() %>% length()
+    number_panels        = subdata$expl2   %>% unique() %>% length()
+    number_outcomes      = subdata$outcome %>% unique() %>% length()
     
 
     adjust_heigth = 30 + number_explanatory*50 + number_panels*100 + number_outcomes*10
