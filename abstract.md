@@ -3,7 +3,7 @@
 [globalsurg.org](http://globalsurg.org/)
 
 
-**Background** Surgical site infection (SSI) is one of the most common infections associated with health care, but its importance as a global health priority is not fully understood. We quanti ed the burden of SSI after gastrointestinal surgery in countries in all parts of the world.
+**Background** Surgical site infection (SSI) is one of the most common infections associated with health care, but its importance as a global health priority is not fully understood. We quantified the burden of SSI after gastrointestinal surgery in countries in all parts of the world.
 
 **Methods** This international, prospective, multicentre cohort study included consecutive patients undergoing elective or emergency gastrointestinal resection within 2-week time periods at any health-care facility in any country. Countries with participating centres were strati ed into high-income, middle-income, and low-income groups according to the UN’s Human Development Index (HDI). Data variables from the GlobalSurg 1 study and other studies that have been found to a ect the likelihood of SSI were entered into risk adjustment models. The primary outcome measure was the 30-day SSI incidence (de ned by US Centers for Disease Control and Prevention criteria for super cial and deep incisional SSI). Relationships with explanatory variables were examined using Bayesian multilevel logistic regression models. This trial is registered with ClinicalTrials.gov, number NCT02662231.
 

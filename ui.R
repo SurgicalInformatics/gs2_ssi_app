@@ -163,11 +163,13 @@ shinyUI(fluidPage(
                                 uiOutput("plot.ui"),
                                 #p('Table'),
                                 tableOutput('table')), 
-                       #tabPanel('Colour palettes', img(src='brewer-pal.png', align = "left")),
-                       tabPanel("Study summary",
+                       tabPanel("Visual abstract",
                                 br(),
-                                downloadLink("laysummary", "Lay Summary - Download PDF"),
-                                includeMarkdown("lay_summary.md")),
+                                includeMarkdown("info.md")),
+                       tabPanel("Lay summary",
+                                br(),
+                                includeMarkdown("lay_summary.md"),
+                                downloadLink("laysummary", "Lay Summary - Download PDF")),
                        tabPanel("Abstract", 
                                 br(),
                                 p("Full publication will be available on 14-February 2018"),
@@ -179,8 +181,8 @@ shinyUI(fluidPage(
   # bottom info ----------
   fluidRow(
     column(12,
-           p("App information and open-source code: ",
-             a("https://github.com/riinuots/gs2_ssi_app", href="https://github.com/riinuots/gs2_ssi_app"))
+           p("App information and open-source code: "),
+           a("Surgical Informatics @UoE", href="https://github.com/SurgicalInformatics/gs2_ssi_app")
     ))
   # shinyappUI and fluidpage end -----------  
 ))
