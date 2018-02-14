@@ -83,7 +83,7 @@ shinyServer(function(input, output, session) {
 
     adjust_heigth = 30 + number_explanatory*50 + number_panels*100 + number_outcomes*10
 
-    print(paste("Number of levels in explanatory", number_explanatory))
+    #print(paste("Number of levels in explanatory", number_explanatory))
     updateSliderInput(session, "height", value = adjust_heigth)
     
     subdata

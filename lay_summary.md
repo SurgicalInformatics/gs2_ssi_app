@@ -1,5 +1,15 @@
-### Surgical site infection after gastrointestinal surgery in high-income, middle-income, and low-income countries: a prospective, international, multicentre cohort study
+* The GlobalSurg Collaborative have been professionally crowd-sourcing wordwide surgical outcomes' data since 2014.
 
+* Local hospital data can be collected and entered into our secure database by research minded individuals from medical students to clinical professors.
+
+* GlobalSurg 1 (collection period: July 1, 2014 to Dec 31, 2014) collected worldwide mortality data following emergency abdominal surgery. This included anonymised data for 10 745 patients from 357 hospitals in 58 countries.
+
+* GlobalSurg 2 (collection period: Jan 4, 2016 to July 31 2016) collected surgical site infections data following gastrointestinal surgery. This included anonymised data for 12 539 patients from 343 hospitals in 66 countries.
+
+* The full dataset of GlobalSurg 2 can be accessed interactively at [ssi.globalsurg.org](http://ssi.globalsurg.org/).
+
+
+### Surgical site infection after gastrointestinal surgery in high-income, middle-income, and low-income countries: a prospective, international, multicentre cohort study
 
 [globalsurg.org](http://globalsurg.org/)
 
