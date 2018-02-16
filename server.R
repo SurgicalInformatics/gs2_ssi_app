@@ -23,7 +23,7 @@ alldata$reintervention_yn.factor %<>% fct_shift(2)
 
 
 #there's a logical for this in the ui
-barplot_type = 'stack' #'fill' or 'stack'
+barplot_type =  'stack' #'fill' or 'stack'
 
 
 shinyServer(function(input, output, session) {
