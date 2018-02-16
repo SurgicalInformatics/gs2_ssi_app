@@ -157,7 +157,7 @@ shinyUI(fluidPage(
     
     # main panel -----------
     column(8, 
-           tabsetPanel(type = "tabs", 
+           tabsetPanel(type = "tabs", selected = "Visual abstract",
                        tabPanel("Data",
                                 conditionalPanel("$('html').hasClass('shiny-busy')", h3("Loading...", style="color:#FF0099")),
                                 uiOutput("plot.ui"),
@@ -172,7 +172,9 @@ shinyUI(fluidPage(
                                 downloadLink("laysummary", "Lay Summary - Download PDF")),
                        tabPanel("Abstract", 
                                 br(),
-                                p("Full publication will be available on 14-February 2018"),
+                                p("Full article available at ",
+                                  a("http://www.thelancet.com/journals/laninf/article/PIIS1473-3099(18)30101-4/fulltext",
+                                    href = "http://www.thelancet.com/journals/laninf/article/PIIS1473-3099(18)30101-4/fulltext")),
                                 includeMarkdown("abstract.md"))
            )
     )
