@@ -18,6 +18,8 @@ save(shinydata, file = 'shinydata.rda')
 
 names(allvars_grouped)[2] = "Patient characteristics"
 names(allvars_grouped)[3] = "Operative characteristics"
+names(allvars_grouped$`Operative characteristics`)[1] = "Procedure start-time" #typo
+
 
 save(allvars_grouped, file = 'allvars_grouped.rda')
 
