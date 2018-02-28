@@ -45,6 +45,9 @@ shinyServer(function(input, output, session) {
     alldata = alldata %>% 
       filter(hdi_tertile %in% input$subset1)
     
+    alldata = alldata %>% 
+      filter(age_years.2groups %in% c(input$subset2_child))
+    
     
     subdata = alldata[, c(expl1, expl2, outcome)]
     colnames(subdata) = c('expl1', 'expl2', 'outcome')

@@ -123,7 +123,18 @@ shinyUI(fluidPage(
                                                                choices   = list('High HDI '       = 'High',
                                                                                 'Middle HDI '     = 'Middle',
                                                                                 'Low HDI '        = 'Low')
-                                                               ,selected = c('High', 'Middle', 'Low'))
+                                                               ,selected = c('High', 'Middle', 'Low')),
+                                            checkboxGroupInput("subset2_child",
+                                                               label     = ("Subsetting: included ages"),
+                                                               #note the spaces after the names (e.g. 'Ideal ')
+                                                               #that's because in this syntax, Shiny expects names and values to be different
+                                                               #which would be useful if you data for, e.g. 1,2,3,4,5 instead of names
+                                                               #without the spaces you get:
+                                                               #ERROR: 'selected' must be the values instead of names of 'choices' for the input 'subset1'
+                                                               choices   = list('Children (<18) '       = 'Children (<18)',
+                                                                                'Adults (18+) '         = 'Adults (18+)',
+                                                                                'Age missing '          = 'Missing')
+                                                               ,selected = c('Children (<18)', 'Adults (18+)', "Missing"))
                                             
                                   )
                            ), # end_A3.1

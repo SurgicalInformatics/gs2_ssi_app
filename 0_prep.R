@@ -1,5 +1,16 @@
 load('gs2_ssi.rda')
 
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(broom)
+library(forcats)
+library(magrittr)
+library(scales)
+library(readr)
+theme_set(theme_bw())
+
+
 shinydata$los.quantiles %<>% 
   fct_recode("<1 day"   = "[0,1]",
              "2-3 days" = "(1,3]",
@@ -13,6 +24,7 @@ shinydata$time2op.hours.factor %<>%
              "12-23 h" = "12-23",
              "24-47 h" = "24-47",
              "48+ h"   =  "48+")
+
 
 save(shinydata, file = 'shinydata.rda')
 
