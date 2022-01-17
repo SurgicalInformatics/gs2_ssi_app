@@ -8,6 +8,7 @@ library(magrittr)
 library(scales)
 theme_set(theme_bw())
 library(shiny)
+library(markdown)
 
 load('shinydata.rda')
 alldata = shinydata
@@ -164,7 +165,6 @@ shinyServer(function(input, output, session) {
     my_ncol = as.numeric(input$legend_columns)
     
     my_breaks = 0:10/10
-    
     p = ggplot(summary_table, aes(x=expl1, fill = fct_rev(outcome), y=n))+
       geom_bar(position=barplot_type, stat='identity') +
       facet_wrap(~expl2, ncol=1)+
